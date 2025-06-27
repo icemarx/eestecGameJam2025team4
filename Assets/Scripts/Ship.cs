@@ -42,7 +42,7 @@ public abstract class Ship : MonoBehaviour
     public void Move()
     {
         Vector3 direction = (target.position - transform.position).normalized;
-        transform.position += direction * speed;
+        transform.position += direction * speed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
