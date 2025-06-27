@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    public GameObject prefab_Projectile;
+
     public int health = 100;
+
 
     public void TakeDamage(int damageTaken)
     {

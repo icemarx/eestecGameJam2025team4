@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2555296964831498664}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.9835515, y: -2.128766, z: 0.55215096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5543345590559811925
 MonoBehaviour:
@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498c16dd585894749b05020ea6da1d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugOn: 1
+  prefab_EnemyShip: {fileID: 3851684847222374601, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+  prefab_FriendlyShip: {fileID: 0}
+  tower: {fileID: 0}
+  enemyShips: []
+  spawnDistance: 10
