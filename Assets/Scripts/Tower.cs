@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int health = 100;
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damageTaken)
     {
-        
+        health = Mathf.Max(health - damageTaken, 0);
+
+        if(health <= 0)
+        {
+            GameManager.LoseGame();
+        }
     }
 }

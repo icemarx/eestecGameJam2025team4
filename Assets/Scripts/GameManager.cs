@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static string[] tags = { "Tower", "Projectile", "Ship" };
+
+    public enum GameState
     {
-        
+        Running,
+        Paused,
+        Over
+    }
+    public static GameState gameState = GameState.Running;
+
+
+    public static void ChangeState(GameState newState)
+    {
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void WinGame()
     {
-        
+        if(gameState == GameState.Running)
+        {
+            Debug.Log("YOU WIN!");
+            ChangeState(GameState.Over);
+        }
+    }
+
+    public static void LoseGame()
+    {
+        if (gameState == GameState.Running)
+        {
+            Debug.Log("You lose");
+            ChangeState(GameState.Over);
+        }
     }
 }

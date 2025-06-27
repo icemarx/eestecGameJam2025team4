@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class Ship : MonoBehaviour
 {
+    public Transform target;
+
+
     // Start is called before the first frame update
     void Start()
     {

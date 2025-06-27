@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 1;
+    public int damage = 10;
+    public Vector3 direction;
+    
+
+    void FixedUpdate()
     {
-        
+        Move();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Move()
     {
-        
+        transform.position += direction * speed;
     }
+
 }
