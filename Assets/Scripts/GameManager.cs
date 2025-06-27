@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static string[] tags = { "Tower", "Projectile", "Ship" };
 
     public enum GameState
     {
