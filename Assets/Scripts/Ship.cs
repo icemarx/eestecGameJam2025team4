@@ -16,6 +16,10 @@ public abstract class Ship : MonoBehaviour
     public GameObject goModel;
     protected Collider myCollider;
 
+    
+    public delegate void ShipDelegate(Ship ship, bool enemy);
+    public static event ShipDelegate OnShipDestroyed;
+
     private void Start()
     {
         OnCreatedEntity();
@@ -55,6 +59,11 @@ public abstract class Ship : MonoBehaviour
         {
             DestroyEntity();
         }
+    }
+
+    public void NotifyDestroyed(bool isEnemy)
+    {
+        OnShipDestroyed?.Invoke(this, isEnemy);
     }
 
     public virtual void HandleCollision(Collision collision) { Debug.Log("Unhandled collision!"); }

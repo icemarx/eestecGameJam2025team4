@@ -19,6 +19,7 @@ public class EnemyShip : Ship
         goModel.SetActive(false);
         myCollider.enabled = false;
 
+        NotifyDestroyed(true);
         /*
          TODO: INSERT VFX HERE
          */
