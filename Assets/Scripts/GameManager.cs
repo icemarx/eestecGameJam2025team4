@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
     public static int curHP = 100;
 
     [Header("Wave info")]
-    public int currentWaveNum = 0;
-    public int shipsLeftInWave = 0;
+    public static int currentWaveNum = 0;
+    public static int shipsLeftInWave = 0;
 
 
     void Awake()
@@ -69,13 +69,7 @@ public class GameManager : MonoBehaviour
         if (debugOn && Input.GetKeyDown(KeyCode.O) && ( gameState == GameState.Idle || gameState == GameState.WaveOver))
         {
             // start wave
-            currentWaveNum++;
-            shipsLeftInWave = currentWaveNum * 7;
-            if (ChangeState(GameState.WaveRunning))
-            {
-                StartCoroutine(RunWave());
-            }
-
+            ChangeState(GameState.WaveRunning);
         }
     }
 
@@ -86,6 +80,26 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("New state is the same as old state <" + newState + ">");
             return false;
+        }
+
+        switch (newState) {
+            case GameState.WaveRunning:
+            // start wave
+            currentWaveNum++;
+            shipsLeftInWave = currentWaveNum * 7;
+            Instance.StartCoroutine(Instance.RunWave());
+            break;
+            case GameState.WaveOver:
+            // TODO:
+            // open UI
+            break;
+            case GameState.Over:
+            // TODO:
+            // Open UI
+            break;
+            default:
+            Debug.LogError("Unknown state: " + newState);
+            break;
         }
 
         gameState = newState;
@@ -142,19 +156,18 @@ public class GameManager : MonoBehaviour
             {
                 GenerateShip();
                 shipsLeftInWave--;
-                Debug.Log("Left in wave: " + shipsLeftInWave);
                 yield return new WaitForSeconds(1f);
             } else if(enemyShips.Count + friendlyShips.Count == 0)
             {
                 isWaveRunning = false;
             }
-            //Debug.Log("Still standing: " + (enemyShips.Count + friendlyShips.Count));
             yield return new WaitForSeconds(0.125f);
         }
 
         Debug.Log("Wave #" + currentWaveNum + " over");
         ChangeState(GameState.WaveOver);
     }
+
 
     public static void HandleShipDestroyed(Ship ship, bool isEnemy)
     {
@@ -165,7 +178,6 @@ public class GameManager : MonoBehaviour
         {
             friendlyShips.Remove((FriendlyShip)ship);
         }
-        Debug.Log("Still standing: " + (enemyShips.Count + friendlyShips.Count));
     }
 
     public static void HandleShipGift()
