@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public static int friendlyScore = 1000;
     public static int[] enemyScores = new int[] { 100, 300, 700 };
 
+
     void Awake()
     {
         // Ensure only one instance exists
@@ -126,7 +127,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-        if(gameState == GameState.Over)
+        if (gameState == GameState.Over)
         {
             Debug.Log("Game over");
             return false;
@@ -135,20 +136,20 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.WaveRunning:
-            // start wave
-            currentWaveNum++;
-            shipsLeftInWave = currentWaveNum * 7;
-            Instance.StartCoroutine(Instance.RunWave());
-            break;
+                // start wave
+                currentWaveNum++;
+                shipsLeftInWave = currentWaveNum * 7;
+                Instance.StartCoroutine(Instance.RunWave());
+                break;
             case GameState.WaveOver:
-            Instance.uiManager.DisplayUpgradeMenu();
-            break;
+                Instance.uiManager.DisplayUpgradeMenu();
+                break;
             case GameState.Over:
-            Instance.uiManager.DisplayGameOver(score, currentWaveNum, numOfEnemies);
-            break;
+                Instance.uiManager.DisplayGameOver(score, currentWaveNum, numOfEnemies);
+                break;
             default:
-            Debug.LogError("Unknown state: " + newState);
-            break;
+                Debug.LogError("Unknown state: " + newState);
+                break;
         }
 
         gameState = newState;
@@ -256,6 +257,8 @@ public class GameManager : MonoBehaviour
         }
         Instance.uiManager.UpdateHealthText(curHP, maxHP);
         Instance.uiManager.UpdateButtons();
+        if (Instance.tower)
+            Instance.tower.UpdateHealthText(curHP, maxHP);
     }
 
     public void Heal()
@@ -272,10 +275,11 @@ public class GameManager : MonoBehaviour
 
     public static void UpdateScore(int idx, bool isEnemy)
     {
-        if(isEnemy)
+        if (isEnemy)
         {
             score += enemyScores[idx];
-        } else
+        }
+        else
         {
             score += friendlyScore;
         }

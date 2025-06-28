@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Tower : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Tower : MonoBehaviour
 
     public float fireCooldown = 0f;
 
+    public TMP_Text healthText;
 
     public void TakeDamage(int damageTaken)
     {
@@ -24,7 +26,7 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
-        if(fireCooldown > 0)
+        if (fireCooldown > 0)
         {
             fireCooldown -= Time.deltaTime;
         }
@@ -46,11 +48,11 @@ public class Tower : MonoBehaviour
         // Check for input from A and D keys
         float rotationInput = 0f;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
         {
             rotationInput = 1f; // Rotate counter-clockwise
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.A))
         {
             rotationInput = -1f; // Rotate clockwise
         }
@@ -83,4 +85,11 @@ public class Tower : MonoBehaviour
         shoot_ap[shoot_sfx_ix].Play();
         shoot_sfx_ix = (shoot_sfx_ix + 1) % shoot_ap.Length;
     }
+
+
+    public void UpdateHealthText(int currHP, int maxHP)
+    {
+        healthText.text = "" + currHP + "/" + maxHP;
+    }
+
 }

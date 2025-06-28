@@ -29,7 +29,7 @@ public abstract class Ship : MonoBehaviour
     protected Collider myCollider;
 
 
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem;
     public AudioSource audioSource;
 
     public AudioSource towerHitSfx1;
