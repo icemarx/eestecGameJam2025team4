@@ -15,11 +15,7 @@ public abstract class Ship : MonoBehaviour
     // movement
     public float speed = 1;
     public Transform target;
-    private float zigzagFrequency = 5f;
-    private float zigzagMagnitude = 0.5f;
-    private float spiralSpeed = 2f;
-    private float spiralRadius = 0.5f;
-    private float timeAlive = 0f;
+    private float timeAlive;
 
     // health and damage
     public int damage = 10;
@@ -37,6 +33,8 @@ public abstract class Ship : MonoBehaviour
         myCollider = GetComponent<Collider>();
         if (!myCollider)
             Debug.LogError("No collider present!");
+
+        timeAlive = Random.value * 2 * Mathf.PI;
     }
 
     void FixedUpdate()
@@ -66,7 +64,9 @@ public abstract class Ship : MonoBehaviour
             break;
             case C_ZIGZAG:
             direction = (target.position - transform.position).normalized;
-            transform.position += direction * speed * Time.fixedDeltaTime;
+            transform.position += direction * speed * Time.fixedDeltaTime;        
+            transform.position += transform.right * Mathf.Sin(2*timeAlive) / 40f;
+            timeAlive += Time.fixedDeltaTime;
             break;
             case C_SPIRAL:
             Vector3 forward = (target.position - transform.position).normalized;
