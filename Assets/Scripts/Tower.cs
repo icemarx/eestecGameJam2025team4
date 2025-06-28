@@ -71,6 +71,7 @@ public class Tower : MonoBehaviour
         Vector2 direction = new Vector2(projectileSpawnPoint.position.x, projectileSpawnPoint.position.z) - new Vector2(transform.position.x, transform.position.z);
         projectile.direction = new Vector3(direction.x, 0, direction.y).normalized;
 
+        shoot_ap[shoot_sfx_ix].pitch = 1f + (Random.value - 0.5f) * 0.2f;
         shoot_ap[shoot_sfx_ix].Play();
         shoot_sfx_ix = (shoot_sfx_ix + 1) % shoot_ap.Length;
     }

@@ -20,6 +20,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2853996705875827754, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 4133910319335313272}
+    - target: {fileID: 2853996705875827754, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 1764501934938387916}
+    - target: {fileID: 3075387903291772643, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075387903291772643, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075387903291772643, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3075387903291772643, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60,6 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3075387903291772643, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3851684847222374601, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
       propertyPath: m_Name
       value: ShipStraight
@@ -74,6 +98,16 @@ PrefabInstance:
       addedObject: {fileID: 2384795113943512271}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+--- !u!198 &1764501934938387916 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4488007298828858502, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+  m_PrefabInstance: {fileID: 2752930778662830410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4133910319335313272 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2263840004293627442, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+  m_PrefabInstance: {fileID: 2752930778662830410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5455959418896710332 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7891196989993974774, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}

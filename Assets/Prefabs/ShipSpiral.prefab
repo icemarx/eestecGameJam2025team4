@@ -24,6 +24,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2853996705875827754, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 4760798526444899563}
+    - target: {fileID: 2853996705875827754, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 7148230380590724703}
     - target: {fileID: 3075387903291772643, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -86,6 +94,16 @@ Transform:
 --- !u!1 &3528621632953710895 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7891196989993974774, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+  m_PrefabInstance: {fileID: 6735985864134755033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4760798526444899563 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2263840004293627442, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
+  m_PrefabInstance: {fileID: 6735985864134755033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7148230380590724703 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4488007298828858502, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
   m_PrefabInstance: {fileID: 6735985864134755033}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8620874221070265766

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class FriendlyShip : Ship
 {
+
+    public ParticleSystem particleSystem;
+
     public override void HandleCollision(Collision collision)
     {
 
-        if ( canHandleCollisions && collision.gameObject.CompareTag("Tower"))
+        if (canHandleCollisions && collision.gameObject.CompareTag("Tower"))
         {
             EnterTower();
         }
@@ -17,14 +20,15 @@ public class FriendlyShip : Ship
     {
         canHandleCollisions = false;
         speed = 0;
-        if(myCollider) // not sure why this is needed but there's an error without it
+        if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
-        
+
         GameManager.HandleShipGift();
         GameManager.HandleShipDestroyed(this);
         /*
          TODO: INSERT VFX HERE
          */
+        particleSystem.Play();
 
         StartCoroutine(DestroyAfterDelay());
     }
@@ -35,7 +39,7 @@ public class FriendlyShip : Ship
         goModel.SetActive(false);
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
-        
+
         GameManager.HandleShipDestroyed(this);
         /*
          TODO: INSERT VFX HERE

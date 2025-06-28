@@ -29,6 +29,8 @@ public abstract class Ship : MonoBehaviour
     protected Collider myCollider;
 
 
+    public ParticleSystem particleSystem;
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -38,6 +40,7 @@ public abstract class Ship : MonoBehaviour
             Debug.LogError("No collider present!");
 
         timeAlive = Random.value * 2 * Mathf.PI;
+        particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     void FixedUpdate()
@@ -92,6 +95,8 @@ public abstract class Ship : MonoBehaviour
 
         if (health <= 0)
         {
+            particleSystem.Emit(10);
+            audioSource.Play();
             DestroyEntity();
         }
     }

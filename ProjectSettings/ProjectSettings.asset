@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Tower Defence Game
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: b2401ba8cbf4e1e42b96cbe303977d94, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
