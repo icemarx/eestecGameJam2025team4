@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [Header("Resources")]
     public int wealth = 100;
     public static int resourceMultiplier = 1;
-    public static int[] resourceWorth = new int[] { 1, 2, 5 }; // picked resources
+    public static int[] resourceWorth = new int[] { 40, 2, 5 }; // picked resources
 
 
     [Header("Health")]
