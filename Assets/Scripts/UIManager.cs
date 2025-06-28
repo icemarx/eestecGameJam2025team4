@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text waveReachedText;
     public TMP_Text enemiesText;
 
+    // sound effect
+    public AudioSource buttonClickSound;
+
 
     private void Start()
     {
@@ -76,6 +79,7 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
+        PlaySoundEffect();
         // TODO: change scene to main game
         // GameManager.Instance.TogglePaused();
         GameManager.Instance.ResetGame();
@@ -144,6 +148,7 @@ public class UIManager : MonoBehaviour
     {
         if(GameManager.Instance.wealth >= cost)
         {
+            PlaySoundEffect();
             GameManager.UpdateWealth(GameManager.Instance.wealth - cost);
             GameManager.Instance.Heal();
         }
@@ -163,5 +168,10 @@ public class UIManager : MonoBehaviour
     public void HideGameOver()
     {
         gameObject.SetActive(true);
+    }
+
+    public void PlaySoundEffect()
+    {
+        buttonClickSound.Play();
     }
 }

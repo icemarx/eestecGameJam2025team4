@@ -163,6 +163,7 @@ public class UpgradeManager : MonoBehaviour
         if(u != null && GameManager.Instance.wealth - u.cost >= 0)
         {
             Debug.Log("purchasing");
+            GameManager.Instance.uiManager.PlaySoundEffect();
             GameManager.UpdateWealth(GameManager.Instance.wealth - u.cost);
             Upgrade p = new Upgrade(u);
             ApplyUpgrade(p);
