@@ -220,7 +220,8 @@ public class GameManager : MonoBehaviour
     public static void HandleShipGift()
     {
         wealth += resourceWorth[0] * resourceMultiplier;
-        Debug.Log("Current Wealth: " + wealth);
+        Instance.uiManager.UpdateWealthText(wealth);
+        // Debug.Log("Current Wealth: " + wealth);
     }
 
     public static void UpdateHealth(int newHealth)

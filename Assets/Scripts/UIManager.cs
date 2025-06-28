@@ -1,20 +1,25 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public Canvas upgradeShop;
     public Canvas pauseMenu;
-
     public AudioMixer mixer;
 
+    public Canvas upgradeShop;
+    public TMP_Text wealthText;
+
+
+    /**
+     * PAUSE MENU
+     * */
 
     public void DisplayPauseMenu()
     {
         pauseMenu.gameObject.SetActive(true);
     }
-
 
     public void HidePauseMenu()
     {
@@ -27,18 +32,6 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void DisplayUpgradeMenu()
-    {
-        upgradeShop.gameObject.SetActive(true);
-    }
-
-
-    public void HideUpgradeMenu()
-    {
-        upgradeShop.gameObject.SetActive(false);
-        GameManager.ChangeState(GameManager.GameState.WaveRunning);
-    }
-    
     public void UpdateMusicVolume(float value)
     {
         mixer.SetFloat("musicVol", LinearToDB(value));
@@ -67,6 +60,28 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.TogglePaused();
         GameManager.Instance.ResetGame();
         SceneManager.LoadScene("MainScene");
+    }
+
+
+    /**
+     * UPGRADE MENU
+     * */
+
+    public void DisplayUpgradeMenu()
+    {
+        upgradeShop.gameObject.SetActive(true);
+        UpdateWealthText(GameManager.wealth);
+    }
+
+    public void HideUpgradeMenu()
+    {
+        upgradeShop.gameObject.SetActive(false);
+        GameManager.ChangeState(GameManager.GameState.WaveRunning);
+    }
+
+    public void UpdateWealthText(int wealth)
+    {
+        wealthText.text = "Wealth: " + wealth;
     }
 
 }

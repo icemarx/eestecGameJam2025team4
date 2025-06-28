@@ -4658,9 +4658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f34d1e107d766428b484b8f952f96c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeShop: {fileID: 1240390427}
   pauseMenu: {fileID: 2100549673}
   mixer: {fileID: 24100000, guid: dec607da08674b74b97b792cd609966e, type: 2}
+  upgradeShop: {fileID: 1240390427}
+  wealthText: {fileID: 0}
 --- !u!4 &1786093602
 Transform:
   m_ObjectHideFlags: 0
