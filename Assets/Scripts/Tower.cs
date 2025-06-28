@@ -14,6 +14,8 @@ public class Tower : MonoBehaviour
     public AudioSource[] shoot_ap;
     int shoot_sfx_ix = 0;
 
+    public float fireCooldown = 0f;
+
 
     public void TakeDamage(int damageTaken)
     {
@@ -22,11 +24,17 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+        if(fireCooldown > 0)
+        {
+            fireCooldown -= Time.deltaTime;
+        }
+
         if (GameManager.gameState == GameManager.GameState.WaveRunning)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && fireCooldown <= 0f)
             {
                 ShootProjectile();
+                fireCooldown = GameManager.fireCooldown - GameManager.fireCooldown * GameManager.rateOfFireBoost / 100.0f;
             }
 
             RingRotation();

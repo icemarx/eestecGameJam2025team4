@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     public static int curHP = 100;
     public static int healingFactor = 10;
     public static int bulletDamage = 10;
+    public static float fireCooldown = 1f;
+    public static int rateOfFireBoost = 0;
 
     [Header("Wave info")]
     public static int currentWaveNum = 0;
@@ -87,6 +89,8 @@ public class GameManager : MonoBehaviour
         friendlyShips.Clear();
         score = 0;
         numOfEnemies = 0;
+        rateOfFireBoost = 0;
+        fireCooldown = 1f;
 
         upgradeManager.ResetUpgrades();
         ChangeState(GameState.WaveRunning);

@@ -75,13 +75,13 @@ public class UpgradeManager : MonoBehaviour
         available.Add(new Upgrade(3, "Increase Damage", 270, 25, 2));
         available.Add(new Upgrade(3, "Increase Damage", 350, 40, 3));
 
-        /*
         // Firing Rate
         available.Add(new Upgrade(4, "Increase Firing Rate", 100, 0, 0));
         available.Add(new Upgrade(4, "Increase Firing Rate", 160, 15, 1));
         available.Add(new Upgrade(4, "Increase Firing Rate", 220, 30, 2));
         available.Add(new Upgrade(4, "Increase Firing Rate", 300, 50, 3));
 
+        /*
         // Ally Support
         available.Add(new Upgrade(5, "Ally Support", 200, 1, 0));
         available.Add(new Upgrade(5, "Ally Support", 300, 2, 1));
@@ -140,7 +140,7 @@ public class UpgradeManager : MonoBehaviour
             GameManager.bulletDamage = u.value;
             break;
             case C_ID_FIRING_RATE:
-            // GameManager.maxHP = u.value;
+            GameManager.rateOfFireBoost = u.value;
             break;
             case C_ID_ALLY_WORTH:
             // GameManager.maxHP = u.value;
