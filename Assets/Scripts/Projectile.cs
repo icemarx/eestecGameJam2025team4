@@ -9,13 +9,13 @@ public class Projectile : MonoBehaviour
     public Vector3 direction;
 
     public float timeToLive = 3f;
-    
+
 
     void FixedUpdate()
     {
         Move();
         timeToLive -= Time.deltaTime;
-        if(timeToLive <= 0)
+        if (timeToLive <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ship"))
+        if (collision.gameObject.CompareTag("Ship"))
         {
             collision.gameObject.GetComponent<Ship>().TakeDamage(GameManager.bulletDamage);
             Destroy(this.gameObject);

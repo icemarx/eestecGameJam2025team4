@@ -21,6 +21,12 @@ public class FriendlyShip : Ship
         canHandleCollisions = false;
         speed = 0;
         goModel.SetActive(false);
+        if (friendlyParticles)
+        {
+            friendlyParticles.Emit(10);
+        }
+        towerHitSfx1.Play();
+        towerHitSfx2.Play();
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
 
@@ -31,12 +37,6 @@ public class FriendlyShip : Ship
         /*
          TODO: INSERT VFX HERE
          */
-        if (friendlyParticles)
-        {
-            friendlyParticles.Emit(10);
-        }
-        towerHitSfx1.Play();
-        towerHitSfx2.Play();
 
 
         StartCoroutine(DestroyAfterDelay());

@@ -18,6 +18,9 @@ public class EnemyShip : Ship
     {
         canHandleCollisions = false;
         goModel.SetActive(false);
+        GetComponent<ParticleSystem>().Emit(10);
+        towerHitSfx1.Play();
+        towerHitSfx2.Play();
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
 
@@ -29,9 +32,6 @@ public class EnemyShip : Ship
          TODO: INSERT VFX HERE
          */
 
-        GetComponent<ParticleSystem>().Emit(10);
-        towerHitSfx1.Play();
-        towerHitSfx2.Play();
 
         StartCoroutine(DestroyAfterDelay());
     }

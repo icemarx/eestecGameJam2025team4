@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     }
     public static GameState gameState = GameState.Idle;
     public bool isPaused = false;
-    public bool debugOn = true;
+    public bool debugOn = false;
 
     [Header("Prefabs")]
     public GameObject[] prefabs_EnemyShip;
