@@ -5,6 +5,8 @@ using UnityEngine;
 public class FriendlyShip : Ship
 {
 
+
+    public ParticleSystem friendlyParticles;
     public override void HandleCollision(Collision collision)
     {
 
@@ -28,6 +30,12 @@ public class FriendlyShip : Ship
         /*
          TODO: INSERT VFX HERE
          */
+        if (friendlyParticles)
+        {
+            friendlyParticles.Emit(10);
+        }
+        towerHitSfx1.Play();
+        towerHitSfx2.Play();
 
 
         StartCoroutine(DestroyAfterDelay());
