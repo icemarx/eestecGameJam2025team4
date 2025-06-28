@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            int shipType = Random.Range(0, Mathf.Min(prefabs_EnemyShip.Length, currentWaveNum / 3));
+            int shipType = Random.Range(0, Mathf.Min(prefabs_EnemyShip.Length, (int)(currentWaveNum * 1.4f - 1f)));
 
             GameObject newEnemyShip = Instantiate(prefabs_EnemyShip[shipType], spawnLocation, Quaternion.identity);
             EnemyShip enemyShip = newEnemyShip.GetComponent<EnemyShip>();

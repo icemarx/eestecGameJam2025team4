@@ -119,6 +119,25 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &69709758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2555296964831498664, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+  m_PrefabInstance: {fileID: 997638252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &69709761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69709758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735050736db147f479ae9a7906d87c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  available: []
+  purchased: []
 --- !u!1 &102349644
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,9 +3173,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1786093601}
     - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: upgradeManager
+      value: 
+      objectReference: {fileID: 69709761}
+    - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: 'prefabs_EnemyShip.Array.data[0]'
       value: 
-      objectReference: {fileID: 7496498325433074192, guid: 1586937d76ac74c4eba18c49e3b565b5, type: 3}
+      objectReference: {fileID: 1389273636510220675, guid: 6cb8afa094ad5e54dbdca1208dc40a08, type: 3}
     - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: 'prefabs_EnemyShip.Array.data[1]'
       value: 
@@ -3164,7 +3187,7 @@ PrefabInstance:
     - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: 'prefabs_EnemyShip.Array.data[2]'
       value: 
-      objectReference: {fileID: 1389273636510220675, guid: 6cb8afa094ad5e54dbdca1208dc40a08, type: 3}
+      objectReference: {fileID: 7496498325433074192, guid: 1586937d76ac74c4eba18c49e3b565b5, type: 3}
     - target: {fileID: 8216357080356122033, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9835515
@@ -3208,7 +3231,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2555296964831498664, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 69709761}
   m_SourcePrefab: {fileID: 100100000, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
 --- !u!1 &1019094995
 GameObject:
