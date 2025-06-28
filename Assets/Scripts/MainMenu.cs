@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         // TODO: change scene to main game
-        return;
+        SceneManager.LoadScene("MainScene");
     }
 
 }
