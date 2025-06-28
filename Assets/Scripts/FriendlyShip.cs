@@ -20,6 +20,7 @@ public class FriendlyShip : Ship
     {
         canHandleCollisions = false;
         speed = 0;
+        goModel.SetActive(false);
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
 
@@ -44,7 +45,7 @@ public class FriendlyShip : Ship
     public override void DestroyEntity()
     {
         canHandleCollisions = false;
-        goModel.SetActive(false);
+
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
 
