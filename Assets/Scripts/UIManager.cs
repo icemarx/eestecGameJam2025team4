@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateWealthText(int wealth)
     {
-        wealthText.text = "Wealth: " + wealth;
+        wealthText.text = "Gems: " + wealth;
     }
 
     public void UpdateButtons()
@@ -127,8 +127,8 @@ public class UIManager : MonoBehaviour
             {
                 if (u.rank == -1)
                 {
-                    b.GetComponentInChildren<TMP_Text>().text = u.title + "\nBUY: " + u.cost + " wealth";
-                    b.interactable = u.cost <= GameManager.Instance.wealth && GameManager.curHP == GameManager.maxHP;
+                    b.GetComponentInChildren<TMP_Text>().text = u.title + "\nBUY: " + u.cost + " gems";
+                    b.interactable = u.cost <= GameManager.Instance.wealth && GameManager.curHP < GameManager.maxHP;
                     // b.onClick.AddListener(() => HealButton());
                 } else
                 {
