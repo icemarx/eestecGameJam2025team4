@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3075387903291772643}
   - component: {fileID: 2853996705875827754}
+  - component: {fileID: 2347376496045589282}
   - component: {fileID: 5544204771710485213}
   - component: {fileID: 8801534343515547614}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ship
   m_TagString: Ship
   m_Icon: {fileID: 0}
@@ -53,6 +54,24 @@ MonoBehaviour:
   health: 30
   destroyDelay: 3
   goModel: {fileID: 7891196989993974774}
+--- !u!114 &2347376496045589282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851684847222374601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5f0f5d61623df4b83edeae4edf159d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  target: {fileID: 0}
+  damage: 10
+  health: 30
+  destroyDelay: 3
+  goModel: {fileID: 0}
 --- !u!136 &5544204771710485213
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -112,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6078404157941180629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,6 +217,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0aa51577605fd9041bd3e845c3fa3687, type: 3}
       propertyPath: m_Name
       value: StraightShipGen1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0aa51577605fd9041bd3e845c3fa3687, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4650644643273983200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Transformer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147383152926507590}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 727814128126623536}
   - {fileID: 8518020751992483789}
   m_Father: {fileID: 6491027456732236053}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5767719299523064530
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6491027456732236053}
   - component: {fileID: 4305294530306318248}
   - component: {fileID: 1968516117213147120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fc8733fa322724da4dd25f5d147080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 10
   damage: 10
   direction: {x: 0, y: 0, z: 0}
   timeToLive: 3
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8518020751992483789}
   - component: {fileID: 2155862650191292203}
   - component: {fileID: 4569549806904429041}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 727814128126623536}
   - component: {fileID: 8805219760163876789}
   - component: {fileID: 195846211853590670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

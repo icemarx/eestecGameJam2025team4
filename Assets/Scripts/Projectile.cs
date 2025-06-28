@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 
     public void Move()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += direction * speed * Time.fixedDeltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)

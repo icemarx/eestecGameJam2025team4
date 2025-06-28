@@ -2,17 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FriendlyShip : MonoBehaviour
+public class FriendlyShip : Ship
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void HandleCollision(Collision collision)
     {
-        
+
+        if (collision.gameObject.CompareTag("Tower"))
+        {
+            collision.gameObject.GetComponent<Tower>().TakeDamage(damage);
+            EnterTower();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnterTower()
     {
-        
+        speed = 0;
+        myCollider.enabled = false;
+
+        NotifyDestroyed(false);
+        /*
+         TODO: INSERT VFX HERE
+         */
+
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    public override void DestroyEntity()
+    {
+        goModel.SetActive(false);
+        myCollider.enabled = false;
+
+        NotifyDestroyed(false);
+        /*
+         TODO: INSERT VFX HERE
+         */
+
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(this.gameObject);
     }
 }
