@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [Header("GameObject links")]
     public Tower tower;
     public UIManager uiManager;
+    public UpgradeManager upgradeManager;
     public static List<EnemyShip> enemyShips = new List<EnemyShip>();
     public static List<FriendlyShip> friendlyShips = new List<FriendlyShip>();
 
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
     [Header("Health")]
     public static int maxHP = 100;
     public static int curHP = 100;
+    public static int healingFactor = 10;
+    public static int bulletDamage = 10;
 
     [Header("Wave info")]
     public static int currentWaveNum = 0;
@@ -68,6 +71,8 @@ public class GameManager : MonoBehaviour
     {
         wealth = 100;
         maxHP = 100;
+        healingFactor = 10;
+        bulletDamage = 10;
         curHP = maxHP;
         currentWaveNum = 0;
         shipsLeftInWave = 0;
@@ -76,6 +81,7 @@ public class GameManager : MonoBehaviour
         enemyShips.Clear();
         friendlyShips.Clear();
 
+        upgradeManager.ResetUpgrades();
         ChangeState(GameState.WaveRunning);
     }
 
@@ -231,5 +237,10 @@ public class GameManager : MonoBehaviour
         {
             GameManager.LoseGame();
         }
+    }
+
+    public void Heal()
+    {
+        UpdateHealth(curHP + healingFactor);
     }
 }

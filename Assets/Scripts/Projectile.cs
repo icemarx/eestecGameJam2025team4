@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed = 10;
-    public int damage = 10;
+    // public int damage = 10;
     public Vector3 direction;
 
     public float timeToLive = 3f;
@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ship"))
         {
-            collision.gameObject.GetComponent<Ship>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Ship>().TakeDamage(GameManager.bulletDamage);
             Destroy(this.gameObject);
         }
     }
