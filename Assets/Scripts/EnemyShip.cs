@@ -17,7 +17,8 @@ public class EnemyShip : Ship
     public override void DestroyEntity()
     {
         goModel.SetActive(false);
-        myCollider.enabled = false;
+        if (myCollider) // not sure why this is needed but there's an error without it
+            myCollider.enabled = false;
 
         NotifyDestroyed(true);
         /*

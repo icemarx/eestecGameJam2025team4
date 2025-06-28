@@ -15,24 +15,30 @@ public class GameManager : MonoBehaviour
     public static GameState gameState = GameState.Running;
     public bool debugOn = true;
 
+    [Header("Prefabs")]
     public GameObject[] prefabs_EnemyShip;
     public GameObject[] prefabs_FriendlyShip;
 
+    [Header("GameObject links")]
     public Tower tower;
     public List<EnemyShip> enemyShips = new List<EnemyShip>();
+    public List<FriendlyShip> friendlyShips = new List<FriendlyShip>();
 
+    [Header("Spawning")]
     public float spawnDistance = 10f;
+    public float friendlyShipChance = 0.25f;
 
+    [Header("Resources")]
     public int wealth = 100;
     public int resourceMultiplier = 1;
-    public int[] resourceWorth = new int[]{ 1, 2, 5 };
+    public int[] resourceWorth = new int[]{ 1, 2, 5 }; // picked resources
 
 
-    // HP
+    [Header("Health")]
     public static int maxHP = 100;
     public static int curHP = 100;
 
-    // waves info
+    [Header("Wave info")]
     public int currentWaveNum = 0;
 
     void Awake()
@@ -51,18 +57,20 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         Ship.OnShipDestroyed += HandleShipDestroyed;
+        Ship.OnShipGift += HandleShipGift;
     }
 
     private void OnDisable()
     {
         Ship.OnShipDestroyed -= HandleShipDestroyed;
+        Ship.OnShipGift -= HandleShipGift;
     }
 
     private void Update()
     {
         if (debugOn && Input.GetKeyDown(KeyCode.I))
         {
-            GenerateEnemyShip();
+            GenerateShip();
         }
     }
 
@@ -90,17 +98,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GenerateEnemyShip()
+    public void GenerateShip()
     {
         Vector2 circlePoint = Random.insideUnitCircle.normalized * spawnDistance;
         Vector3 spawnLocation = tower.transform.position + new Vector3(circlePoint.x, 0, circlePoint.y);
 
-        // TODO: int shipType = Random.Range(0, Mathf.Max(prefabs_EnemyShip.Length, waveNumber % 3));
+        if (Random.value <= friendlyShipChance)
+        {
+            int shipType = Random.Range(0, Mathf.Max(prefabs_EnemyShip.Length, currentWaveNum % 3));
 
-        GameObject newEnemyShip = Instantiate(prefabs_EnemyShip[0], spawnLocation, Quaternion.identity);
-        EnemyShip enemyShip = newEnemyShip.GetComponent<EnemyShip>();
-        enemyShip.target = tower.transform;
-        enemyShips.Add(enemyShip);
+            GameObject newFriendlyShip = Instantiate(prefabs_FriendlyShip[0], spawnLocation, Quaternion.identity);
+            FriendlyShip friendlyShip = newFriendlyShip.GetComponent<FriendlyShip>();
+            friendlyShip.target = tower.transform;
+            friendlyShips.Add(friendlyShip);
+        } else
+        {
+            // TODO: int shipType = Random.Range(0, Mathf.Max(prefabs_EnemyShip.Length, waveNumber % 3));
+
+            GameObject newEnemyShip = Instantiate(prefabs_EnemyShip[0], spawnLocation, Quaternion.identity);
+            EnemyShip enemyShip = newEnemyShip.GetComponent<EnemyShip>();
+            enemyShip.target = tower.transform;
+            enemyShips.Add(enemyShip);
+
+        }
     }
 
     public void HandleShipDestroyed(Ship ship, bool isEnemy)
@@ -109,6 +129,12 @@ public class GameManager : MonoBehaviour
         {
             enemyShips.Remove((EnemyShip)ship);
         }
+    }
+
+    public void HandleShipGift(Ship ship, bool isEnemy)
+    {
+        wealth += resourceWorth[ship.type] * resourceMultiplier;
+        Debug.Log("Current Wealth: " + wealth);
     }
 
     public static void UpdateHealth(int newHealth)

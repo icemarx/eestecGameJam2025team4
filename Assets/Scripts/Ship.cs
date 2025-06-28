@@ -31,11 +31,14 @@ public abstract class Ship : MonoBehaviour
 
     public delegate void ShipDelegate(Ship ship, bool enemy);
     public static event ShipDelegate OnShipDestroyed;
+    public static event ShipDelegate OnShipGift;
 
     private void Start()
     {
         OnCreatedEntity();
         myCollider = GetComponent<Collider>();
+        if (!myCollider)
+            Debug.LogError("No collider present!");
     }
 
     void FixedUpdate()
@@ -110,6 +113,11 @@ public abstract class Ship : MonoBehaviour
     public void NotifyDestroyed(bool isEnemy)
     {
         OnShipDestroyed?.Invoke(this, isEnemy);
+    }
+
+    public void NotifyGift()
+    {
+        OnShipGift?.Invoke(this, false);
     }
 
     public virtual void HandleCollision(Collision collision) { Debug.Log("Unhandled collision!"); }

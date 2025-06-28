@@ -17,8 +17,10 @@ public class FriendlyShip : Ship
     public void EnterTower()
     {
         speed = 0;
-        myCollider.enabled = false;
+        if(myCollider) // not sure why this is needed but there's an error without it
+            myCollider.enabled = false;
 
+        NotifyGift();
         NotifyDestroyed(false);
         /*
          TODO: INSERT VFX HERE
@@ -30,7 +32,8 @@ public class FriendlyShip : Ship
     public override void DestroyEntity()
     {
         goModel.SetActive(false);
-        myCollider.enabled = false;
+        if (myCollider) // not sure why this is needed but there's an error without it
+            myCollider.enabled = false;
 
         NotifyDestroyed(false);
         /*
