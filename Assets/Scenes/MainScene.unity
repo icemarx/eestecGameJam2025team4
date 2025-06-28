@@ -3186,6 +3186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManagerGO
       objectReference: {fileID: 0}
+    - target: {fileID: 2555296964831498664, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: tower
       value: 
@@ -3194,6 +3198,10 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1786093601}
+    - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: spawnDistance
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: upgradeManager
       value: 
@@ -4207,7 +4215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957297965762465518, guid: b1c5d55f32f81b34c98ed366ee2f5b4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.099495
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3957297965762465518, guid: b1c5d55f32f81b34c98ed366ee2f5b4b, type: 3}
       propertyPath: m_LocalPosition.y
