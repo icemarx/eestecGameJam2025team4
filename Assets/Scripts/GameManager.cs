@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
         Idle,
         WaveRunning,
         WaveOver,
-        Paused,
         Over
     }
     public static GameState gameState = GameState.Idle;
+    public bool isPaused = false;
     public bool debugOn = true;
 
     [Header("Prefabs")]
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     [Header("GameObject links")]
     public Tower tower;
+    public UIManager uiManager;
     public static List<EnemyShip> enemyShips = new List<EnemyShip>();
     public static List<FriendlyShip> friendlyShips = new List<FriendlyShip>();
 
@@ -55,12 +56,37 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Persist across scenes
+        // DontDestroyOnLoad(gameObject); // Persist across scenes
+    }
+
+    private void Start()
+    {
+        ResetGame();
+    }
+
+    public void ResetGame()
+    {
+        wealth = 100;
+        maxHP = 100;
+        curHP = maxHP;
+        currentWaveNum = 0;
+        shipsLeftInWave = 0;
+        gameState = GameState.Idle;
+        isPaused = false;
+        enemyShips.Clear();
+        friendlyShips.Clear();
+
+        ChangeState(GameState.WaveRunning);
     }
 
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePaused();
+        }
+
         if (debugOn && Input.GetKeyDown(KeyCode.I))
         {
             GenerateShip();
@@ -90,8 +116,7 @@ public class GameManager : MonoBehaviour
             Instance.StartCoroutine(Instance.RunWave());
             break;
             case GameState.WaveOver:
-            // TODO:
-            // open UI
+            Instance.uiManager.DisplayUpgradeMenu();
             break;
             case GameState.Over:
             // TODO:
@@ -104,6 +129,20 @@ public class GameManager : MonoBehaviour
 
         gameState = newState;
         return true;
+    }
+
+    public void TogglePaused()
+    {
+        isPaused = !isPaused;
+        if(isPaused)
+        {
+            Time.timeScale = Mathf.Epsilon;
+            uiManager.DisplayPauseMenu();
+        } else
+        {
+            uiManager.HidePauseMenu();
+            Time.timeScale = 1;
+        }
     }
 
     public static void WinGame()

@@ -18,12 +18,15 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.gameState == GameManager.GameState.WaveRunning)
         {
-            ShootProjectile();
-        }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ShootProjectile();
+            }
 
-        RingRotation();
+            RingRotation();
+        }
     }
 
     public void RingRotation()
