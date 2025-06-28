@@ -32,6 +32,11 @@ public abstract class Ship : MonoBehaviour
     public ParticleSystem particleSystem;
     public AudioSource audioSource;
 
+    public AudioSource towerHitSfx1;
+    public AudioSource towerHitSfx2;
+
+
+
     private void Start()
     {
         OnCreatedEntity();
@@ -95,8 +100,9 @@ public abstract class Ship : MonoBehaviour
 
         if (health <= 0)
         {
-            particleSystem.Emit(10);
+            audioSource.pitch = 1f + (Random.value - 0.5f) * 0.2f;
             audioSource.Play();
+            particleSystem.Emit(10);
             DestroyEntity();
         }
     }

@@ -26,6 +26,10 @@ public class EnemyShip : Ship
          TODO: INSERT VFX HERE
          */
 
+        particleSystem.Emit(10);
+        towerHitSfx1.Play();
+        towerHitSfx2.Play();
+
         StartCoroutine(DestroyAfterDelay());
     }
 

@@ -5,8 +5,6 @@ using UnityEngine;
 public class FriendlyShip : Ship
 {
 
-    public ParticleSystem particleSystem;
-
     public override void HandleCollision(Collision collision)
     {
 
@@ -28,7 +26,7 @@ public class FriendlyShip : Ship
         /*
          TODO: INSERT VFX HERE
          */
-        particleSystem.Play();
+
 
         StartCoroutine(DestroyAfterDelay());
     }
@@ -44,6 +42,8 @@ public class FriendlyShip : Ship
         /*
          TODO: INSERT VFX HERE
          */
+
+
 
         StartCoroutine(DestroyAfterDelay());
     }
