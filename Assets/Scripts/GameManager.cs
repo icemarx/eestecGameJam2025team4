@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public float friendlyShipChance = 0.20f;
 
     [Header("Resources")]
-    public static int wealth = 100;
+    public int wealth = 100;
     public static int resourceMultiplier = 1;
     public static int[] resourceWorth = new int[] { 1, 2, 5 }; // picked resources
 
@@ -229,8 +229,7 @@ public class GameManager : MonoBehaviour
 
     public static void HandleShipGift()
     {
-        wealth += resourceWorth[0] * resourceMultiplier;
-        Instance.uiManager.UpdateWealthText(wealth);
+        UpdateWealth(Instance.wealth + resourceWorth[0] * resourceMultiplier);
         // Debug.Log("Current Wealth: " + wealth);
     }
 
@@ -241,10 +240,19 @@ public class GameManager : MonoBehaviour
         {
             GameManager.LoseGame();
         }
+        Instance.uiManager.UpdateHealthText(curHP, maxHP);
+        Instance.uiManager.UpdateButtons();
     }
 
     public void Heal()
     {
         UpdateHealth(curHP + healingFactor);
+    }
+
+    public static void UpdateWealth(int newWealth)
+    {
+        Instance.wealth = newWealth;
+        Instance.uiManager.UpdateWealthText(Instance.wealth);
+        Instance.uiManager.UpdateButtons();
     }
 }

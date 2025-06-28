@@ -10,9 +10,21 @@ public class UIManager : MonoBehaviour
     public AudioMixer mixer;
 
     public Canvas upgradeShop;
+    public TMP_Text healthText;
     public TMP_Text wealthText;
 
     public Button[] buttons;
+
+    private void Start()
+    {
+        buttons[0].onClick.AddListener(() => HealButton());
+        buttons[1].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(1));
+        buttons[2].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(2));
+        buttons[3].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(3));
+        buttons[4].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(4));
+        buttons[5].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(5));
+    }
+
 
     /**
      * PAUSE MENU
@@ -72,13 +84,20 @@ public class UIManager : MonoBehaviour
     public void DisplayUpgradeMenu()
     {
         upgradeShop.gameObject.SetActive(true);
-        UpdateWealthText(GameManager.wealth);
+        UpdateHealthText(GameManager.curHP, GameManager.maxHP);
+        UpdateWealthText(GameManager.Instance.wealth);
+        UpdateButtons();
     }
 
     public void HideUpgradeMenu()
     {
         upgradeShop.gameObject.SetActive(false);
         GameManager.ChangeState(GameManager.GameState.WaveRunning);
+    }
+
+    public void UpdateHealthText(int current, int max)
+    {
+        healthText.text = "Health: " + current + "/" + max;
     }
 
     public void UpdateWealthText(int wealth)
@@ -88,6 +107,35 @@ public class UIManager : MonoBehaviour
 
     public void UpdateButtons()
     {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            // Debug.Log("BUTTON " + i);
+            Button b = buttons[i];
+            UpgradeManager.Upgrade u = GameManager.Instance.upgradeManager.GetLowestRankingAvailableID(i);
 
+            if (u == null)
+            {
+                b.GetComponentInChildren<TMP_Text>().text = "ALREADY PURCHASED!";
+                b.interactable = false;
+            } else
+            {
+                if (u.rank == -1)
+                {
+                    b.GetComponentInChildren<TMP_Text>().text = u.title + "\nBUY: " + u.cost + " wealth";
+                    b.interactable = u.cost <= GameManager.Instance.wealth || GameManager.curHP == GameManager.maxHP;
+                    // b.onClick.AddListener(() => HealButton());
+                } else
+                {
+                    b.GetComponentInChildren<TMP_Text>().text = u.title + "\nRANK: " + u.rank + "\nBUY: " + u.cost + " wealth";
+                    b.interactable = u.cost <= GameManager.Instance.wealth;
+                    // b.onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(u.id, u.rank));
+                }
+            }
+        }
+    }
+
+    public void HealButton()
+    {
+        GameManager.Instance.Heal();
     }
 }

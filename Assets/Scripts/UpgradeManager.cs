@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public const int C_ID_MAX_HP = 0;
-    public const int C_ID_HEALING_FACTOR = 1;
-    public const int C_ID_DAMAGE = 2;
-    public const int C_ID_FIRING_RATE = 3;
-    public const int C_ID_ALLY_WORTH = 4;
-    public const int C_ID_PASSIVE = 5;
+    public const int C_ID_HEAL = 0;
+    public const int C_ID_MAX_HP = 1;
+    public const int C_ID_HEALING_FACTOR = 2;
+    public const int C_ID_DAMAGE = 3;
+    public const int C_ID_FIRING_RATE = 4;
+    public const int C_ID_ALLY_WORTH = 5;
+    public const int C_ID_PASSIVE = 6;
 
     [System.Serializable]
     public class Upgrade
@@ -40,6 +41,8 @@ public class UpgradeManager : MonoBehaviour
     
     public List<Upgrade> available = new List<Upgrade>();
     public List<Upgrade> purchased = new List<Upgrade>();
+
+    
 
     void Start()
     {
@@ -102,17 +105,22 @@ public class UpgradeManager : MonoBehaviour
 
         foreach (Upgrade u in purchased)
         {
-            Upgrade mem = null;
-            foreach (Upgrade u2 in available)
-            {
-                if (u2.id == u.id && u2.rank == u.rank)
-                {
-                    mem = u2;
-                    break;
-                }
-            }
-            if (mem != null) available.Remove(mem);
+            RemovePurchasedFromAvailable(u);
         }
+    }
+
+    public void RemovePurchasedFromAvailable(Upgrade p)
+    {
+        Upgrade mem = null;
+        foreach (Upgrade u2 in available)
+        {
+            if (u2.id == p.id && u2.rank == p.rank)
+            {
+                mem = u2;
+                break;
+            }
+        }
+        if (mem != null) available.Remove(mem);
     }
 
     public void ApplyUpgrade(Upgrade u)
@@ -123,6 +131,7 @@ public class UpgradeManager : MonoBehaviour
         {
             case C_ID_MAX_HP:
             GameManager.maxHP = u.value;
+            GameManager.UpdateHealth(GameManager.maxHP+1);
             break;
             case C_ID_HEALING_FACTOR:
             GameManager.healingFactor = u.value;
@@ -146,15 +155,31 @@ public class UpgradeManager : MonoBehaviour
 
     public void PurchaseUpgrade(int upgradeId)
     {
-        // TODO
-        /*
-        Upgrade upgrade = upgrades.Find(u => u.id == upgradeId);
-        if (upgrade != null)
+
+        Debug.Log("purchase " + upgradeId);
+
+        Upgrade u = GetLowestRankingAvailableID(upgradeId);
+        Debug.Log("u: " + u + " " + (GameManager.Instance.wealth - u.cost));
+        if(u != null && GameManager.Instance.wealth - u.cost >= 0)
         {
-            // Add logic to check player currency here
-            upgrade.currentRank++;
-            upgrade.cost += 50; // Example cost scaling
+            Debug.Log("purchasing");
+            GameManager.UpdateWealth(GameManager.Instance.wealth - u.cost);
+            Upgrade p = new Upgrade(u);
+            ApplyUpgrade(p);
+            RemovePurchasedFromAvailable(p);
         }
-        */
+    }
+
+    public Upgrade GetLowestRankingAvailableID(int id)
+    {
+        Upgrade mini = null;
+        foreach(Upgrade u in available)
+        {
+            if (u.id == id && (mini == null || mini.rank > u.rank))
+            {
+                mini = u;
+            }
+        }
+        return mini;
     }
 }
