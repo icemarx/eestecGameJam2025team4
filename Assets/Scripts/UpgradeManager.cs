@@ -81,13 +81,13 @@ public class UpgradeManager : MonoBehaviour
         available.Add(new Upgrade(4, "Increase Firing Rate", 220, 30, 2));
         available.Add(new Upgrade(4, "Increase Firing Rate", 300, 50, 3));
 
-        /*
         // Ally Support
         available.Add(new Upgrade(5, "Ally Support", 200, 1, 0));
         available.Add(new Upgrade(5, "Ally Support", 300, 2, 1));
         available.Add(new Upgrade(5, "Ally Support", 400, 3, 2));
         available.Add(new Upgrade(5, "Ally Support", 500, 4, 3));
-
+        
+        /*
         // Mining Efficiency
         available.Add(new Upgrade(6, "Mining Efficiency", 150, 1, 0));
         available.Add(new Upgrade(6, "Mining Efficiency", 220, 2, 1));
@@ -143,7 +143,7 @@ public class UpgradeManager : MonoBehaviour
             GameManager.rateOfFireBoost = u.value;
             break;
             case C_ID_ALLY_WORTH:
-            // GameManager.maxHP = u.value;
+            GameManager.resourceMultiplier = u.value;
             break;
             case C_ID_PASSIVE:
             // GameManager.maxHP = u.value;

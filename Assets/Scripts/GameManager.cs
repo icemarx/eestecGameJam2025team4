@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         numOfEnemies = 0;
         rateOfFireBoost = 0;
         fireCooldown = 1f;
+        resourceMultiplier = 1;
 
         upgradeManager.ResetUpgrades();
         ChangeState(GameState.WaveRunning);
