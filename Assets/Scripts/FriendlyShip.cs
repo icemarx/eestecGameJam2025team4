@@ -7,21 +7,21 @@ public class FriendlyShip : Ship
     public override void HandleCollision(Collision collision)
     {
 
-        if (collision.gameObject.CompareTag("Tower"))
+        if ( canHandleCollisions && collision.gameObject.CompareTag("Tower"))
         {
-            collision.gameObject.GetComponent<Tower>().TakeDamage(damage);
             EnterTower();
         }
     }
 
     public void EnterTower()
     {
+        canHandleCollisions = false;
         speed = 0;
         if(myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
-
-        NotifyGift();
-        NotifyDestroyed(false);
+        
+        GameManager.HandleShipGift();
+        GameManager.HandleShipDestroyed(this, false);
         /*
          TODO: INSERT VFX HERE
          */
@@ -31,11 +31,12 @@ public class FriendlyShip : Ship
 
     public override void DestroyEntity()
     {
+        canHandleCollisions = false;
         goModel.SetActive(false);
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
-
-        NotifyDestroyed(false);
+        
+        GameManager.HandleShipDestroyed(this, false);
         /*
          TODO: INSERT VFX HERE
          */

@@ -53,8 +53,11 @@ MonoBehaviour:
   - {fileID: 4952999810018507667, guid: 5408d43f755574147b6b94821c4c6e12, type: 3}
   tower: {fileID: 0}
   enemyShips: []
+  friendlyShips: []
   spawnDistance: 10
+  friendlyShipChance: 0.2
   wealth: 100
   resourceMultiplier: 1
   resourceWorth: 010000000200000005000000
   currentWaveNum: 0
+  shipsLeftInWave: 0

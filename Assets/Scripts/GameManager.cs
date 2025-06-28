@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
-        Running,
+        Idle,
+        WaveRunning,
+        WaveOver,
         Paused,
         Over
     }
-    public static GameState gameState = GameState.Running;
+    public static GameState gameState = GameState.Idle;
     public bool debugOn = true;
 
     [Header("Prefabs")]
@@ -21,17 +23,17 @@ public class GameManager : MonoBehaviour
 
     [Header("GameObject links")]
     public Tower tower;
-    public List<EnemyShip> enemyShips = new List<EnemyShip>();
-    public List<FriendlyShip> friendlyShips = new List<FriendlyShip>();
+    public static List<EnemyShip> enemyShips = new List<EnemyShip>();
+    public static List<FriendlyShip> friendlyShips = new List<FriendlyShip>();
 
     [Header("Spawning")]
     public float spawnDistance = 10f;
-    public float friendlyShipChance = 0.25f;
+    public float friendlyShipChance = 0.20f;
 
     [Header("Resources")]
-    public int wealth = 100;
-    public int resourceMultiplier = 1;
-    public int[] resourceWorth = new int[]{ 1, 2, 5 }; // picked resources
+    public static int wealth = 100;
+    public static int resourceMultiplier = 1;
+    public static int[] resourceWorth = new int[]{ 1, 2, 5 }; // picked resources
 
 
     [Header("Health")]
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Wave info")]
     public int currentWaveNum = 0;
+    public int shipsLeftInWave = 0;
+
 
     void Awake()
     {
@@ -54,17 +58,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // Persist across scenes
     }
 
-    private void OnEnable()
-    {
-        Ship.OnShipDestroyed += HandleShipDestroyed;
-        Ship.OnShipGift += HandleShipGift;
-    }
-
-    private void OnDisable()
-    {
-        Ship.OnShipDestroyed -= HandleShipDestroyed;
-        Ship.OnShipGift -= HandleShipGift;
-    }
 
     private void Update()
     {
@@ -72,29 +65,45 @@ public class GameManager : MonoBehaviour
         {
             GenerateShip();
         }
+
+        if (debugOn && Input.GetKeyDown(KeyCode.O) && ( gameState == GameState.Idle || gameState == GameState.WaveOver))
+        {
+            // start wave
+            currentWaveNum++;
+            shipsLeftInWave = currentWaveNum * 7;
+            if (ChangeState(GameState.WaveRunning))
+            {
+                StartCoroutine(RunWave());
+            }
+
+        }
     }
 
 
-    public static void ChangeState(GameState newState)
+    public static bool ChangeState(GameState newState)
     {
+        if(gameState == newState)
+        {
+            Debug.Log("New state is the same as old state <" + newState + ">");
+            return false;
+        }
 
+        gameState = newState;
+        return true;
     }
 
     public static void WinGame()
     {
-        if (gameState == GameState.Running)
-        {
+        if(ChangeState(GameState.Over))
             Debug.Log("YOU WIN!");
-            ChangeState(GameState.Over);
-        }
     }
 
     public static void LoseGame()
     {
-        if (gameState == GameState.Running)
+        if (gameState == GameState.WaveRunning)
         {
-            Debug.Log("You lose");
-            ChangeState(GameState.Over);
+            if (ChangeState(GameState.Over))
+                Debug.Log("You lose");
         }
     }
 
@@ -105,17 +114,15 @@ public class GameManager : MonoBehaviour
 
         if (Random.value <= friendlyShipChance)
         {
-            int shipType = Random.Range(0, Mathf.Max(prefabs_EnemyShip.Length, currentWaveNum % 3));
-
             GameObject newFriendlyShip = Instantiate(prefabs_FriendlyShip[0], spawnLocation, Quaternion.identity);
             FriendlyShip friendlyShip = newFriendlyShip.GetComponent<FriendlyShip>();
             friendlyShip.target = tower.transform;
             friendlyShips.Add(friendlyShip);
         } else
         {
-            // TODO: int shipType = Random.Range(0, Mathf.Max(prefabs_EnemyShip.Length, waveNumber % 3));
+            int shipType = Random.Range(0, Mathf.Min(prefabs_EnemyShip.Length, currentWaveNum / 3));
 
-            GameObject newEnemyShip = Instantiate(prefabs_EnemyShip[0], spawnLocation, Quaternion.identity);
+            GameObject newEnemyShip = Instantiate(prefabs_EnemyShip[shipType], spawnLocation, Quaternion.identity);
             EnemyShip enemyShip = newEnemyShip.GetComponent<EnemyShip>();
             enemyShip.target = tower.transform;
             enemyShips.Add(enemyShip);
@@ -123,17 +130,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void HandleShipDestroyed(Ship ship, bool isEnemy)
+    public IEnumerator RunWave()
     {
-        if(isEnemy)
+        Debug.Log("Starting wave #" + currentWaveNum);
+        yield return new WaitForSeconds(3.0f);
+
+        bool isWaveRunning = true;
+        while (isWaveRunning)
         {
-            enemyShips.Remove((EnemyShip)ship);
+            if(shipsLeftInWave > 0)
+            {
+                GenerateShip();
+                shipsLeftInWave--;
+                Debug.Log("Left in wave: " + shipsLeftInWave);
+                yield return new WaitForSeconds(1f);
+            } else if(enemyShips.Count + friendlyShips.Count == 0)
+            {
+                isWaveRunning = false;
+            }
+            //Debug.Log("Still standing: " + (enemyShips.Count + friendlyShips.Count));
+            yield return new WaitForSeconds(0.125f);
         }
+
+        Debug.Log("Wave #" + currentWaveNum + " over");
+        ChangeState(GameState.WaveOver);
     }
 
-    public void HandleShipGift(Ship ship, bool isEnemy)
+    public static void HandleShipDestroyed(Ship ship, bool isEnemy)
     {
-        wealth += resourceWorth[ship.type] * resourceMultiplier;
+        if (isEnemy)
+        {
+            enemyShips.Remove((EnemyShip)ship);
+        } else
+        {
+            friendlyShips.Remove((FriendlyShip)ship);
+        }
+        Debug.Log("Still standing: " + (enemyShips.Count + friendlyShips.Count));
+    }
+
+    public static void HandleShipGift()
+    {
+        wealth += resourceWorth[0] * resourceMultiplier;
         Debug.Log("Current Wealth: " + wealth);
     }
 

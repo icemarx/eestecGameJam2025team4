@@ -6,6 +6,7 @@ public abstract class Ship : MonoBehaviour
 {
     // type
     public int type = 0;
+    public bool canHandleCollisions = true;
     public const int C_FRIENDLY = 0;
     public const int C_STRAIGHT = 0;
     public const int C_ZIGZAG = 1;
@@ -28,10 +29,7 @@ public abstract class Ship : MonoBehaviour
     public GameObject goModel;
     protected Collider myCollider;
 
-
-    public delegate void ShipDelegate(Ship ship, bool enemy);
-    public static event ShipDelegate OnShipDestroyed;
-    public static event ShipDelegate OnShipGift;
+   
 
     private void Start()
     {
@@ -67,12 +65,10 @@ public abstract class Ship : MonoBehaviour
             transform.position += direction * speed * Time.fixedDeltaTime;
             break;
             case C_ZIGZAG:
-            Debug.Log("Zigzag");
             direction = (target.position - transform.position).normalized;
             transform.position += direction * speed * Time.fixedDeltaTime;
             break;
             case C_SPIRAL:
-            Debug.Log("Spiral");
             Vector3 forward = (target.position - transform.position).normalized;
             Vector3 right = Vector3.Cross(forward, Vector3.up).normalized * 2f;
             Vector3 offsetTarget = (forward + right);
@@ -108,16 +104,6 @@ public abstract class Ship : MonoBehaviour
         {
             DestroyEntity();
         }
-    }
-
-    public void NotifyDestroyed(bool isEnemy)
-    {
-        OnShipDestroyed?.Invoke(this, isEnemy);
-    }
-
-    public void NotifyGift()
-    {
-        OnShipGift?.Invoke(this, false);
     }
 
     public virtual void HandleCollision(Collision collision) { Debug.Log("Unhandled collision!"); }

@@ -146,7 +146,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShipZigZag
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2347376496045589282, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6876916520254858003, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
     m_AddedGameObjects:
