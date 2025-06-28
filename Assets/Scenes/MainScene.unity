@@ -3195,6 +3195,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1714677995}
     - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: debugOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1786093601}
@@ -5393,6 +5397,10 @@ MonoBehaviour:
   - {fileID: 972669318}
   - {fileID: 2128076457}
   - {fileID: 1899302863}
+  gameOver: {fileID: 796535934}
+  finalScoreText: {fileID: 198490373}
+  waveReachedText: {fileID: 840871542}
+  enemiesText: {fileID: 744668636}
 --- !u!4 &1786093602
 Transform:
   m_ObjectHideFlags: 0

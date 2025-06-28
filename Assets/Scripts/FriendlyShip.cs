@@ -21,6 +21,8 @@ public class FriendlyShip : Ship
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
 
+        GameManager.UpdateScore(0, false);
+
         GameManager.HandleShipGift();
         GameManager.HandleShipDestroyed(this);
         /*

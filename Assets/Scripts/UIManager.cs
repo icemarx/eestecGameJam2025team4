@@ -15,6 +15,12 @@ public class UIManager : MonoBehaviour
 
     public Button[] buttons;
 
+    public Canvas gameOver;
+    public TMP_Text finalScoreText;
+    public TMP_Text waveReachedText;
+    public TMP_Text enemiesText;
+
+
     private void Start()
     {
         buttons[0].onClick.AddListener(() => HealButton());
@@ -71,7 +77,7 @@ public class UIManager : MonoBehaviour
     public void RestartGame()
     {
         // TODO: change scene to main game
-        GameManager.Instance.TogglePaused();
+        // GameManager.Instance.TogglePaused();
         GameManager.Instance.ResetGame();
         SceneManager.LoadScene("MainScene");
     }
@@ -137,5 +143,21 @@ public class UIManager : MonoBehaviour
     public void HealButton()
     {
         GameManager.Instance.Heal();
+    }
+
+    /*
+     * GAME OVER
+     * */
+    public void DisplayGameOver(int finalScore, int waveReached, int numEnemies)
+    {
+        gameOver.gameObject.SetActive(true);
+        finalScoreText.text = "Final score: " + finalScore;
+        waveReachedText.text = "Wave reached: " + waveReached;
+        enemiesText.text = "Enemies destroyed: " + numEnemies;
+    }
+
+    public void HideGameOver()
+    {
+        gameObject.SetActive(true);
     }
 }

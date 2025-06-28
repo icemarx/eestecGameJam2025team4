@@ -48,6 +48,11 @@ public class GameManager : MonoBehaviour
     public static int currentWaveNum = 0;
     public static int shipsLeftInWave = 0;
 
+    [Header("Scores")]
+    public static int score = 0;
+    public static int numOfEnemies = 0;
+    public static int friendlyScore = 1000;
+    public static int[] enemyScores = new int[] { 100, 300, 700 };
 
     void Awake()
     {
@@ -80,6 +85,8 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         enemyShips.Clear();
         friendlyShips.Clear();
+        score = 0;
+        numOfEnemies = 0;
 
         upgradeManager.ResetUpgrades();
         ChangeState(GameState.WaveRunning);
@@ -114,24 +121,29 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
+        if(gameState == GameState.Over)
+        {
+            Debug.Log("Game over");
+            return false;
+        }
+
         switch (newState)
         {
             case GameState.WaveRunning:
-                // start wave
-                currentWaveNum++;
-                shipsLeftInWave = currentWaveNum * 7;
-                Instance.StartCoroutine(Instance.RunWave());
-                break;
+            // start wave
+            currentWaveNum++;
+            shipsLeftInWave = currentWaveNum * 7;
+            Instance.StartCoroutine(Instance.RunWave());
+            break;
             case GameState.WaveOver:
-                Instance.uiManager.DisplayUpgradeMenu();
-                break;
+            Instance.uiManager.DisplayUpgradeMenu();
+            break;
             case GameState.Over:
-                // TODO:
-                // Open UI
-                break;
+            Instance.uiManager.DisplayGameOver(score, currentWaveNum, numOfEnemies);
+            break;
             default:
-                Debug.LogError("Unknown state: " + newState);
-                break;
+            Debug.LogError("Unknown state: " + newState);
+            break;
         }
 
         gameState = newState;
@@ -161,11 +173,8 @@ public class GameManager : MonoBehaviour
 
     public static void LoseGame()
     {
-        if (gameState == GameState.WaveRunning)
-        {
-            if (ChangeState(GameState.Over))
-                Debug.Log("You lose");
-        }
+        if (ChangeState(GameState.Over))
+            Debug.Log("You lose");
     }
 
     public void GenerateShip()
@@ -254,5 +263,21 @@ public class GameManager : MonoBehaviour
         Instance.wealth = newWealth;
         Instance.uiManager.UpdateWealthText(Instance.wealth);
         Instance.uiManager.UpdateButtons();
+    }
+
+    public static void UpdateScore(int idx, bool isEnemy)
+    {
+        if(isEnemy)
+        {
+            score += enemyScores[idx];
+        } else
+        {
+            score += friendlyScore;
+        }
+    }
+
+    public static void KilledEnemyNotification()
+    {
+        numOfEnemies++;
     }
 }
