@@ -16,7 +16,7 @@ public abstract class Ship : MonoBehaviour
     public GameObject goModel;
     protected Collider myCollider;
 
-    
+
     public delegate void ShipDelegate(Ship ship, bool enemy);
     public static event ShipDelegate OnShipDestroyed;
 
@@ -41,8 +41,17 @@ public abstract class Ship : MonoBehaviour
 
     public void Move()
     {
+        // switch this.type
+
+        // if this.type == straight:
         Vector3 direction = (target.position - transform.position).normalized;
         transform.position += direction * speed * Time.fixedDeltaTime;
+
+        // if this.type == "zigzag":
+        //transform.position.x += sin(Time.time) * 2 - 1 ;
+
+        // if this.type == "spiral":
+        // idk bro look up spiral math
     }
 
     private void OnCollisionEnter(Collision collision)
