@@ -5,23 +5,22 @@ using UnityEngine;
 public abstract class Ship : MonoBehaviour
 {
     // type
+    [Header("Type")]
     public int type = 0;
-    public bool canHandleCollisions = true;
     public const int C_FRIENDLY = 0;
     public const int C_STRAIGHT = 0;
     public const int C_ZIGZAG = 1;
     public const int C_SPIRAL = 2;
 
     // movement
+    [Header("Movement")]
     public float speed = 1;
     public Transform target;
-    private float zigzagFrequency = 5f;
-    private float zigzagMagnitude = 0.5f;
-    private float spiralSpeed = 2f;
-    private float spiralRadius = 0.5f;
-    private float timeAlive = 0f;
+    private float timeAlive;
 
     // health and damage
+    [Header("Health and Damage")]
+    public bool canHandleCollisions = true;
     public int damage = 10;
     public int health = 30;
     public float destroyDelay = 3f;
@@ -37,6 +36,8 @@ public abstract class Ship : MonoBehaviour
         myCollider = GetComponent<Collider>();
         if (!myCollider)
             Debug.LogError("No collider present!");
+
+        timeAlive = Random.value * 2 * Mathf.PI;
     }
 
     void FixedUpdate()
@@ -54,9 +55,6 @@ public abstract class Ship : MonoBehaviour
 
     public void Move()
     {
-        // switch this.type
-
-        // if this.type == straight:
         switch (type)
         {
             // case C_FRIENDLY:
@@ -67,6 +65,8 @@ public abstract class Ship : MonoBehaviour
             case C_ZIGZAG:
                 direction = (target.position - transform.position).normalized;
                 transform.position += direction * speed * Time.fixedDeltaTime;
+                transform.position += transform.right * Mathf.Sin(2 * timeAlive) / 40f;
+                timeAlive += Time.fixedDeltaTime;
                 break;
             case C_SPIRAL:
                 Vector3 forward = (target.position - transform.position).normalized;
@@ -78,16 +78,6 @@ public abstract class Ship : MonoBehaviour
                 transform.LookAt(transform.position + (transform.position - prev));
                 break;
         }
-
-        if (type == C_FRIENDLY || type == C_STRAIGHT)
-        {
-        }
-
-        // if this.type == "zigzag":
-        //transform.position.x += sin(Time.time) * 2 - 1 ;
-
-        // if this.type == "spiral":
-        // idk bro look up spiral math
     }
 
     private void OnCollisionEnter(Collision collision)

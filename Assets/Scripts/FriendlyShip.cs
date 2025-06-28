@@ -21,7 +21,7 @@ public class FriendlyShip : Ship
             myCollider.enabled = false;
         
         GameManager.HandleShipGift();
-        GameManager.HandleShipDestroyed(this, false);
+        GameManager.HandleShipDestroyed(this);
         /*
          TODO: INSERT VFX HERE
          */
@@ -36,7 +36,7 @@ public class FriendlyShip : Ship
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
         
-        GameManager.HandleShipDestroyed(this, false);
+        GameManager.HandleShipDestroyed(this);
         /*
          TODO: INSERT VFX HERE
          */

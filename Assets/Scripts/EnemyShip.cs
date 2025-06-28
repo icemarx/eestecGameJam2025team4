@@ -21,7 +21,7 @@ public class EnemyShip : Ship
         if (myCollider) // not sure why this is needed but there's an error without it
             myCollider.enabled = false;
 
-        GameManager.HandleShipDestroyed(this, true);
+        GameManager.HandleShipDestroyed(this);
         /*
          TODO: INSERT VFX HERE
          */

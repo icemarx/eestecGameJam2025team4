@@ -23,7 +23,6 @@ public class Tower : MonoBehaviour
             ShootProjectile();
         }
 
-
         RingRotation();
     }
 
