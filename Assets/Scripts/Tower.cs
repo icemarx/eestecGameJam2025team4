@@ -31,16 +31,13 @@ public class Tower : MonoBehaviour
             fireCooldown -= Time.deltaTime;
         }
 
-        if (GameManager.gameState == GameManager.GameState.WaveRunning)
+        if (Input.GetKey(KeyCode.Space) && fireCooldown <= 0f)
         {
-            if (Input.GetKey(KeyCode.Space) && fireCooldown <= 0f)
-            {
-                ShootProjectile();
-                fireCooldown = GameManager.fireCooldown - GameManager.fireCooldown * GameManager.rateOfFireBoost / 100.0f;
-            }
-
-            RingRotation();
+            ShootProjectile();
+            fireCooldown = GameManager.fireCooldown - GameManager.fireCooldown * GameManager.rateOfFireBoost / 100.0f;
         }
+
+        RingRotation();
     }
 
     public void RingRotation()
