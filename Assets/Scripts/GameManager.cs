@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     [Header("Resources")]
     public static int wealth = 100;
     public static int resourceMultiplier = 1;
-    public static int[] resourceWorth = new int[]{ 1, 2, 5 }; // picked resources
+    public static int[] resourceWorth = new int[] { 1, 2, 5 }; // picked resources
 
 
     [Header("Health")]
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             GenerateShip();
         }
 
-        if (debugOn && Input.GetKeyDown(KeyCode.O) && ( gameState == GameState.Idle || gameState == GameState.WaveOver))
+        if (debugOn && Input.GetKeyDown(KeyCode.O) && (gameState == GameState.Idle || gameState == GameState.WaveOver))
         {
             // start wave
             ChangeState(GameState.WaveRunning);
@@ -102,29 +102,30 @@ public class GameManager : MonoBehaviour
 
     public static bool ChangeState(GameState newState)
     {
-        if(gameState == newState)
+        if (gameState == newState)
         {
             Debug.Log("New state is the same as old state <" + newState + ">");
             return false;
         }
 
-        switch (newState) {
+        switch (newState)
+        {
             case GameState.WaveRunning:
-            // start wave
-            currentWaveNum++;
-            shipsLeftInWave = currentWaveNum * 7;
-            Instance.StartCoroutine(Instance.RunWave());
-            break;
+                // start wave
+                currentWaveNum++;
+                shipsLeftInWave = currentWaveNum * 7;
+                Instance.StartCoroutine(Instance.RunWave());
+                break;
             case GameState.WaveOver:
-            Instance.uiManager.DisplayUpgradeMenu();
-            break;
+                Instance.uiManager.DisplayUpgradeMenu();
+                break;
             case GameState.Over:
-            // TODO:
-            // Open UI
-            break;
+                // TODO:
+                // Open UI
+                break;
             default:
-            Debug.LogError("Unknown state: " + newState);
-            break;
+                Debug.LogError("Unknown state: " + newState);
+                break;
         }
 
         gameState = newState;
@@ -134,11 +135,12 @@ public class GameManager : MonoBehaviour
     public void TogglePaused()
     {
         isPaused = !isPaused;
-        if(isPaused)
+        if (isPaused)
         {
             Time.timeScale = Mathf.Epsilon;
             uiManager.DisplayPauseMenu();
-        } else
+        }
+        else
         {
             uiManager.HidePauseMenu();
             Time.timeScale = 1;
@@ -147,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     public static void WinGame()
     {
-        if(ChangeState(GameState.Over))
+        if (ChangeState(GameState.Over))
             Debug.Log("YOU WIN!");
     }
 
@@ -171,7 +173,8 @@ public class GameManager : MonoBehaviour
             FriendlyShip friendlyShip = newFriendlyShip.GetComponent<FriendlyShip>();
             friendlyShip.target = tower.transform;
             friendlyShips.Add(friendlyShip);
-        } else
+        }
+        else
         {
             int shipType = Random.Range(0, Mathf.Min(prefabs_EnemyShip.Length, currentWaveNum / 3));
 
@@ -191,12 +194,13 @@ public class GameManager : MonoBehaviour
         bool isWaveRunning = true;
         while (isWaveRunning)
         {
-            if(shipsLeftInWave > 0)
+            if (shipsLeftInWave > 0)
             {
                 GenerateShip();
                 shipsLeftInWave--;
                 yield return new WaitForSeconds(1f);
-            } else if(enemyShips.Count + friendlyShips.Count == 0)
+            }
+            else if (enemyShips.Count + friendlyShips.Count == 0)
             {
                 isWaveRunning = false;
             }

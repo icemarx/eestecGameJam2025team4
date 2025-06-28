@@ -3153,6 +3153,18 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1786093601}
+    - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: 'prefabs_EnemyShip.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7496498325433074192, guid: 1586937d76ac74c4eba18c49e3b565b5, type: 3}
+    - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: 'prefabs_EnemyShip.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1052867432207021824, guid: a369699b6f7df1e4c95877556035e309, type: 3}
+    - target: {fileID: 5543345590559811925, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
+      propertyPath: 'prefabs_EnemyShip.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1389273636510220675, guid: 6cb8afa094ad5e54dbdca1208dc40a08, type: 3}
     - target: {fileID: 8216357080356122033, guid: 70e00af1c778cc742ab530e846f9f164, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9835515
@@ -4127,7 +4139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957297965762465513, guid: b1c5d55f32f81b34c98ed366ee2f5b4b, type: 3}
       propertyPath: orthographic size
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3957297965762465513, guid: b1c5d55f32f81b34c98ed366ee2f5b4b, type: 3}
       propertyPath: m_BackGroundColor.b
