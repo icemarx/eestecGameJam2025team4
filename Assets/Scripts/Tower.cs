@@ -8,19 +8,12 @@ public class Tower : MonoBehaviour
     public Transform ring;
     public Transform projectileSpawnPoint;
 
-    public int health = 100;
-
     public float ringRotationSpeed = 100f; // Adjust the speed of rotation
 
 
     public void TakeDamage(int damageTaken)
     {
-        health = Mathf.Max(health - damageTaken, 0);
-
-        if(health <= 0)
-        {
-            GameManager.LoseGame();
-        }
+        GameManager.UpdateHealth(GameManager.curHP - damageTaken);
     }
 
     private void Update()

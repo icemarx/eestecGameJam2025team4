@@ -45,8 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugOn: 1
-  prefab_EnemyShip: {fileID: 3851684847222374601, guid: c4e2c8b6eafb3a64a88b2e8e48a98e32, type: 3}
-  prefab_FriendlyShip: {fileID: 0}
+  prefabs_EnemyShip:
+  - {fileID: 1389273636510220675, guid: 6cb8afa094ad5e54dbdca1208dc40a08, type: 3}
+  - {fileID: 1052867432207021824, guid: a369699b6f7df1e4c95877556035e309, type: 3}
+  - {fileID: 7496498325433074192, guid: 1586937d76ac74c4eba18c49e3b565b5, type: 3}
+  prefabs_FriendlyShip:
+  - {fileID: 4952999810018507667, guid: 5408d43f755574147b6b94821c4c6e12, type: 3}
   tower: {fileID: 0}
   enemyShips: []
   spawnDistance: 10
+  wealth: 100
+  resourceMultiplier: 1
+  resourceWorth: 010000000200000005000000
+  currentWaveNum: 0
