@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     public Canvas upgradeShop;
     public TMP_Text wealthText;
 
+    public Button[] buttons;
 
     /**
      * PAUSE MENU
@@ -84,4 +86,8 @@ public class UIManager : MonoBehaviour
         wealthText.text = "Wealth: " + wealth;
     }
 
+    public void UpdateButtons()
+    {
+
+    }
 }
