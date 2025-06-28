@@ -168,16 +168,14 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.WaveOver);
     }
 
-
-    public static void HandleShipDestroyed(Ship ship, bool isEnemy)
+    public static void HandleShipDestroyed(EnemyShip ship)
     {
-        if (isEnemy)
-        {
-            enemyShips.Remove((EnemyShip)ship);
-        } else
-        {
-            friendlyShips.Remove((FriendlyShip)ship);
-        }
+        enemyShips.Remove(ship);
+    }
+
+    public static void HandleShipDestroyed(FriendlyShip ship)
+    {
+        friendlyShips.Remove(ship);
     }
 
     public static void HandleShipGift()
