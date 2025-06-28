@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public static List<FriendlyShip> friendlyShips = new List<FriendlyShip>();
 
     [Header("Spawning")]
-    public float spawnDistance = 10f;
+    public float spawnDistance = 15f;
     public float friendlyShipChance = 0.20f;
 
     [Header("Resources")]
