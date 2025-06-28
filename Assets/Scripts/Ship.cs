@@ -29,7 +29,7 @@ public abstract class Ship : MonoBehaviour
     public GameObject goModel;
     protected Collider myCollider;
 
-   
+
 
     private void Start()
     {
@@ -61,24 +61,24 @@ public abstract class Ship : MonoBehaviour
         {
             // case C_FRIENDLY:
             case C_STRAIGHT:
-            Vector3 direction = (target.position - transform.position).normalized;
-            transform.position += direction * speed * Time.fixedDeltaTime;
-            break;
+                Vector3 direction = (target.position - transform.position).normalized;
+                transform.position += direction * speed * Time.fixedDeltaTime;
+                break;
             case C_ZIGZAG:
-            direction = (target.position - transform.position).normalized;
-            transform.position += direction * speed * Time.fixedDeltaTime;
-            break;
+                direction = (target.position - transform.position).normalized;
+                transform.position += direction * speed * Time.fixedDeltaTime;
+                break;
             case C_SPIRAL:
-            Vector3 forward = (target.position - transform.position).normalized;
-            Vector3 right = Vector3.Cross(forward, Vector3.up).normalized * 2f;
-            Vector3 offsetTarget = (forward + right);
-            Vector3 prev = transform.position;
-            transform.position += offsetTarget.normalized * speed * Time.fixedDeltaTime;
+                Vector3 forward = (target.position - transform.position).normalized;
+                Vector3 right = Vector3.Cross(forward, Vector3.up).normalized * 2f;
+                Vector3 offsetTarget = (forward + right);
+                Vector3 prev = transform.position;
+                transform.position += offsetTarget.normalized * speed * Time.fixedDeltaTime;
 
-            transform.LookAt(transform.position + (transform.position - prev));
-            break;
+                transform.LookAt(transform.position + (transform.position - prev));
+                break;
         }
-            
+
         if (type == C_FRIENDLY || type == C_STRAIGHT)
         {
         }
