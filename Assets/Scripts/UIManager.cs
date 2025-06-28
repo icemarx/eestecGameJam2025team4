@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        buttons[0].onClick.AddListener(() => HealButton());
+        buttons[0].onClick.AddListener(() => HealButton(10));
         buttons[1].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(1));
         buttons[2].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(2));
         buttons[3].onClick.AddListener(() => GameManager.Instance.upgradeManager.PurchaseUpgrade(3));
@@ -128,7 +128,7 @@ public class UIManager : MonoBehaviour
                 if (u.rank == -1)
                 {
                     b.GetComponentInChildren<TMP_Text>().text = u.title + "\nBUY: " + u.cost + " wealth";
-                    b.interactable = u.cost <= GameManager.Instance.wealth || GameManager.curHP == GameManager.maxHP;
+                    b.interactable = u.cost <= GameManager.Instance.wealth && GameManager.curHP == GameManager.maxHP;
                     // b.onClick.AddListener(() => HealButton());
                 } else
                 {
@@ -140,9 +140,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void HealButton()
+    public void HealButton(int cost)
     {
-        GameManager.Instance.Heal();
+        if(GameManager.Instance.wealth >= cost)
+        {
+            GameManager.UpdateWealth(GameManager.Instance.wealth - cost);
+            GameManager.Instance.Heal();
+        }
     }
 
     /*
